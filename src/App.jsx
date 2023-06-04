@@ -48,7 +48,7 @@ const App = () => {
         .use(GoogleDrive, { companionUrl: 'https://companion.uppy.io' })
         .use(ImageEditor, {})
         .use(Instagram, {
-          companionUrl: 'https://companion.uppy.io/connect/instagram/redirect '
+          companionUrl: 'http://companion.uppy.io'
         });
     }
 
