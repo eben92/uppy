@@ -16,6 +16,8 @@ import '@uppy/drag-drop/dist/style.min.css';
 import '@uppy/file-input/dist/style.css';
 import '@uppy/progress-bar/dist/style.min.css';
 import '@uppy/image-editor/dist/style.min.css';
+import ImageEditor from '@uppy/image-editor';
+import Instagram from '@uppy/instagram';
 
 const App = () => {
   const [showInlineDashboard, setShowInlineDashboard] = useState(false);
@@ -41,7 +43,13 @@ const App = () => {
     });
 
     if (uppy2Instance) {
-      uppy2Instance.use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' });
+      uppy2Instance
+        .use(Tus, { endpoint: 'https://tusd.tusdemo.net/files/' })
+        .use(GoogleDrive, { companionUrl: 'https://companion.uppy.io' })
+        .use(ImageEditor, {})
+        .use(Instagram, {
+          companionUrl: 'https://companion.uppy.io/connect/instagram/redirect '
+        });
     }
 
     setUppy2(uppy2Instance);
@@ -90,6 +98,7 @@ const App = () => {
           <DashboardModal
             uppy={uppy2}
             open={open}
+            plugins={['GoogleDrive', 'ImageEditor', 'Instagram']}
             onRequestClose={() => setOpen(false)}
           />
         )}
